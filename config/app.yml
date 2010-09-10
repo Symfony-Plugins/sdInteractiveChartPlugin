@@ -1,0 +1,10 @@
+all:
+  sdInteractiveChart:
+    web_dir:      /sdInteractiveChartPlugin
+    chart_js_url: 'http://www.google.com/'
+    ajax_api:     'jsapi'
+    auto_load_js:  true
+    debug_mode:    false
+    
+    
+

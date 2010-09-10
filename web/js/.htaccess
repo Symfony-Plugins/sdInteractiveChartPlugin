@@ -1,0 +1,9 @@
+# If your server has the expires module enabled then the following code will
+# make sure the expires header for the javscript code is set to one month, this
+# will mean the web browser should not even bother looking for a new version on the
+# server if it already has copy, saving one http request and the bandwidth required.
+
+<ifModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType application/x-javascript "access plus 1 months"
+</ifModule>

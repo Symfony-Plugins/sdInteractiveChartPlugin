@@ -1,0 +1,180 @@
+# sdInteractiveChartPlugin
+**Version 0.2**
+
+##Overview
+
+This plugin allows you to use Google's Visualization API without writing any javascript,
+it simplifies the creation of charts and makes the code a lot neater which is especially useful
+if your planning to include more than one chart in a page.
+
+It allows you to create charts by only writing PHP, all the
+Javascript code is dealt with by the plugin. As many charts as you want can be
+included in each page, it will handle the creation for each one as well as loading
+in any required libraries.
+
+It can create a number of different charts:
+
+*  Area Charts
+*  Bar Charts
+*  Column Charts
+*  Gauges
+*  Line Graphs
+*  Pie Charts
+
+Timeline graphs will be added in a future version.
+
+###Requirements:
+
+This plugin requires jQuery, only tested with 1.4.2 although should work with
+earlier versions as none of the jquery functions used are new ones.
+
+##How to Include
+
+###Installation
+
+To install simply use:
+
+    $ symfony plugin:install -s"beta" sdInteractiveChartPlugin
+
+If this doesn't work (which for some reason happens with some versions of symfony)
+just download the package to your local machine and then use:
+
+    $ symfony plugin:install /path/to/plugin/sdInteractiveChartPlugin-0.2.0.tgz
+
+Clear the cache:
+
+    $ symfony cache:clear
+
+Enable the plugin (in the application's *settings.yml*):
+
+    enabled_modules:        [default, sdInteractiveChart ...
+
+###Assets
+
+Publish the plugin's assets:
+
+    plugin:publish-assets
+
+
+
+###Including the Javascript
+
+The plugin will automatically add the required javascript file to the bottom of
+the head of the page once everything else has loaded.
+
+If you would prefer to include it yourself then you need to edit the *app.yml* file
+under the config directory:
+
+    all:
+     sdInteractiveChart:
+     web_dir:      /sdInteractiveChartPlugin
+     chart_js_url: 'http://www.google.com/'
+     ajax_api:     'jsapi'
+     auto_load_js:  true
+     debug_mode:    false
+
+Change the line *auto_load_js* to false.
+
+Then when you want to load the javascript you will need to use:
+
+    <?php use_helper('sdInteractiveChart'); ?>
+    <?php addInteractiveChartJavascript(); ?>
+
+
+##Creating Charts
+
+The helper class **sdInteractiveChart** is a static class and exposes a list of functions for creating new
+charts, each one returns a chart object of the type requested:
+
+*  newBarChart -- (returns: sdBarGraph object)
+*  newLineChart -- (returns: sdLineGraph object)
+*  newAreaChart -- (returns: sdAreaGraph object)
+*  newColumnChart -- (returns: sdColumnGraph object)
+*  newGuageChart -- (returns: sdGaugeGraph object)
+*  newPieChart -- (returns: sdPieGraph object)
+
+It also contains the special function:
+
+*  generateJsonData -- (returns: formated JSON object)
+
+Which allows you to return chart data requested via ajax to the plugin.
+
+Using the chart object returned by the helper class you can set the chart, and
+specify colors and labels and so fourth.
+
+###Chart Data
+
+You can either directly specify the data for the chart. Or you can tell it to
+retrieve the data via ajax.
+
+####Inline Data
+
+    $chart->inlineGraph($data, $labels, $divName)
+    $chart->inlineGraph(array('hits' => array(1,9,5)), array('Monday', 'Tuesday', 'Wednesday'), 'chart_div');
+
+####Ajax Request
+
+    $chartFun = $chart->ajaxGraph($ajax_url, $extra_ajax_params, $divName);
+    $chartFun = $chart->ajaxGraph( url_for('graphs/data'), array('some_extra_param' => 'hello'), 'chart_div');
+
+The *$divName* is the ID of the div you would like the chart to be created in.
+Any content in there will be overwritten.
+
+###Rendering the Chart
+
+Once your ready for the chart code to be pasted into the page simply call the
+*render()* method of the chart object.
+
+
+##Example A (Inline Data)
+
+This example creates a simple area chart. See http://code.google.com/apis/visualization/documentation/gallery/areachart.html
+
+    use_helper('sdInteractiveChart');
+    $chart = InteractiveChart::newAreaChart();
+    $chart->setWidthAndHeight('400', '240');
+    $chart->setDataColors(array('#aa0000'));
+    $chart->setBaselineColor('#ccc');
+    $chart->inlineGraph(array('hits' => array(1,9,5)), array('Monday', 'Tuesday', 'Wednesday'), 'chart_div');
+    $chart->render();
+
+##Example B (Ajax Data)
+
+This code would go in the page template/action:
+
+    use_helper('sdInteractiveChart');
+    $chart = InteractiveChart::newBarChart();
+    $chart->setWidthAndHeight('500', '320');
+    $chart->setDataColors(array('#990000', '#cd0000'));
+    $chart->setBaselineColor('#aaa');
+    $chart->setLegendPosition(LineGraph::$LEGEND_NONE);
+    $chart->ajaxGraph( url_for('graphs/load_data'), array(), 'chart_div');
+    $chart->render();
+
+Then this would go in the *graphs/load_data* action/template:
+
+    // The labels for each Bar.
+    $labels = array("Apples", "Oranges", "Pears", "Grapes");
+
+    // The Data
+    $data = array('Last Week' => array(1, 5, 3, 7), 'This Week' => array(8, 4, 5, 2));
+    use_helper('sdInteractiveChart');
+
+    // This line then outputs the JSON array to the browser.
+    echo InteractiveChart::generateJsonData($data, $labels, array());
+
+##Callback
+
+If you want to know when the chart has been rendered on screen you can pass the
+name of a function to the *setCallback* function of your chart object.
+
+    $chart->setCallback('graphLoaded');
+
+The chart object will be passed to the function which will contain all the info
+on the chart.
+
+##Feedback
+
+If you find any bugs or have any ideas for any new features which could be added just drop me an email.
+Or alternatively update your local copy of the code, then goto the *contribute* tab for this plugin and
+request to join the project as a developer!

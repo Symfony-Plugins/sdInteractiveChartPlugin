@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.4.6" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>sdInteractiveChartPlugin</name>
+ <channel>plugins.symfony-project.org</channel>
+ <summary>Create Interactive Javascript Charts created using PHP (Powered By Google's Visualization API)</summary>
+ <description>An easy to use plugin to allow you to use Google's Visualization API to create Javascript Charts without writing any Javascript.</description>
+ <lead>
+  <name>Seb Dangerfield</name>
+  <user>sebsecond2</user>
+  <email>seb.dangerfield@second2.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2010-09-10</date>
+ <time>15:30:00</time>
+ <version>
+  <release>0.2.0</release>
+  <api>0.2.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.symfony-project.org/license">MIT license</license>
+ <notes>-</notes>
+ <contents>
+  <dir name="/">
+   <file role="data" name="README" />
+   <file role="data" name="LICENSE" />
+   <dir name="config">
+    <!-- config -->
+    <file role="data" name="app.yml" />
+	<file role="data" name="config.php" />
+   </dir>
+   <dir name="lib">
+    <dir name="helper">
+     <file role="data" name="sdInteractiveChartHelper.php" />
+    </dir>
+     <file role="data" name="sdAreaGraph.class.php" />
+	 <file role="data" name="sdAxisBaseChart.class.php" />
+	 <file role="data" name="sdBarGraph.class.php" />
+	 <file role="data" name="sdBaseChart.class.php" />
+	 <file role="data" name="sdColumnGraph.class.php" />
+	 <file role="data" name="sdGaugeGraph.class.php" />
+	 <file role="data" name="sdInteractiveChartConfig.php" />
+	 <file role="data" name="sdLineGraph.class.php" />
+	 <file role="data" name="sdPieGraph.class.php" />
+
+   </dir>
+   <dir name="web">
+    <dir name="js">
+     <file role="data" name=".htaccess" />
+	 <file role="data" name="interactiveCharts0.2.0.js" />
+	 <file role="data" name="interactiveCharts0.2.0-min.js" />
+    </dir>
+   </dir>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+     <php>
+    <min>5.2.4</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.1</min>
+   </pearinstaller>
+   <package>
+    <name>symfony</name>
+    <channel>pear.symfony-project.com</channel>
+    <min>1.1.0</min>
+    <max>1.4.7</max>
+   </package>
+
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>0.2.0</release>
+    <api>0.2.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2010-09-10</date>
+   <notes>
+* Bug Fix: setting colors using CSS color names now works properly.
+* Added more of the charts config options to each type of chart.
+* Refactored code.
+* Returns the chart index as well as the chart creation object to any callback fucntion
+   </notes>
+  </release>
+  </changelog>
+</package>+
