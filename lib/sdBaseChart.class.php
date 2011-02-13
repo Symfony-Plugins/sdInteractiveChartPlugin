@@ -5,7 +5,7 @@
  * @package    plugins
  * @subpackage sdInteractiveChart
  * @author     Seb Dangerfield
- * @version    0.2
+ * @version    0.3
  */
 
 class BaseChart {
@@ -101,7 +101,11 @@ class BaseChart {
 
 
             if (!$rowCountAdded) {
-                $total = (is_array($dataSet)) ? count($dataSet) : count($data);
+                if ($dataSet instanceof sfOutputEscaperArrayDecorator) {
+                    $total = $dataSet->count();
+                } else {
+                    $total = (is_array($dataSet)) ? count($dataSet) : count($data);
+                }
                 $this->html .= 'data.addRows('.$total.');' . "\n";
                 // Draw labels
                 foreach($labels as $key=>$label) {
@@ -110,9 +114,8 @@ class BaseChart {
 
                 $rowCountAdded = true;
             }
-
-
-            if (!is_array($dataSet)) {
+            
+            if ((!is_array($dataSet)) && !($dataSet instanceof sfOutputEscaperArrayDecorator)) {
                  $this->html .= "data.setValue($dataText, 1, $dataSet);" . "\n";
             } else {
                 foreach($dataSet as $key=>$nextRow) {

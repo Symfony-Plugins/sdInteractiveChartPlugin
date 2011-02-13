@@ -6,7 +6,7 @@
  * @package    plugins
  * @subpackage sdInteractiveChart
  * @author     Seb Dangerfield - Second2
- * @version    0.2
+ * @version    0.3
  */
 
 define('InteractiveChartRoute', dirname(__FILE__).'/../');
@@ -86,15 +86,25 @@ class InteractiveChart {
 
 
 function addInteractiveChartJavascript() {
-    $version = '0.2.0';
+    $version = '0.3.0';
     $ajax_api_url = sfConfig::get('app_sdInteractiveChart_chart_js_url');
     $ajax_api = sfConfig::get('app_sdInteractiveChart_ajax_api');
+
+    if (isset($_SERVER['HTTPS']))
+        $ajax_api_url = str_replace ('http:', 'https:', $ajax_api_url);
     sfContext::getInstance()->getResponse()->addJavascript($ajax_api_url . $ajax_api);
 
-    if (sfConfig::get('app_sdInteractiveChart_debug_mode'))
-        sfContext::getInstance()->getResponse()->addJavascript(sfConfig::get('app_sdInteractiveChart_web_dir') . "/js/interactiveCharts$version.js", 'last');
-    else
-        sfContext::getInstance()->getResponse()->addJavascript(sfConfig::get('app_sdInteractiveChart_web_dir') . "/js/interactiveCharts$version-min.js", 'last');
+    if (sfConfig::get('app_sdInteractiveChart_debug_mode')) {
+        $url = sfConfig::get('app_sdInteractiveChart_web_dir') . "/js/interactiveCharts$version.js";
+        if (isset($_SERVER['HTTPS']))
+            $url = str_replace ('http:', 'https:', $url);
+        sfContext::getInstance()->getResponse()->addJavascript($url, 'last');
+    } else {
+        $url = sfConfig::get('app_sdInteractiveChart_web_dir') . "/js/interactiveCharts$version-min.js";
+        if (isset($_SERVER['HTTPS']))
+            $url = str_replace ('http:', 'https:', $url);
+        sfContext::getInstance()->getResponse()->addJavascript($url, 'last');
+    }
 }
 
 ?>
