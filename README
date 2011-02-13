@@ -1,5 +1,5 @@
 # sdInteractiveChartPlugin
-**Version 0.2**
+**Version 0.3**
 
 ##Overview
 
@@ -39,7 +39,7 @@ To install simply use:
 If this doesn't work (which for some reason happens with some versions of symfony)
 just download the package to your local machine and then use:
 
-    $ symfony plugin:install /path/to/plugin/sdInteractiveChartPlugin-0.2.0.tgz
+    $ symfony plugin:install /path/to/plugin/sdInteractiveChartPlugin-0.3.0.tgz
 
 Clear the cache:
 
@@ -130,6 +130,7 @@ Once your ready for the chart code to be pasted into the page simply call the
 
 This example creates a simple area chart. See http://code.google.com/apis/visualization/documentation/gallery/areachart.html
 
+    <?php
     use_helper('sdInteractiveChart');
     $chart = InteractiveChart::newAreaChart();
     $chart->setWidthAndHeight('400', '240');
@@ -137,6 +138,8 @@ This example creates a simple area chart. See http://code.google.com/apis/visual
     $chart->setBaselineColor('#ccc');
     $chart->inlineGraph(array('hits' => array(1,9,5)), array('Monday', 'Tuesday', 'Wednesday'), 'chart_div');
     $chart->render();
+    ?>
+    <div id="chart_div"></div>
 
 ##Example B (Ajax Data)
 
