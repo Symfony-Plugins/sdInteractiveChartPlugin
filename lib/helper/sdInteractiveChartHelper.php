@@ -6,50 +6,43 @@
  * @package    plugins
  * @subpackage sdInteractiveChart
  * @author     Seb Dangerfield - Second2
- * @version    0.3
+ * @version    0.4
  */
-
-define('InteractiveChartRoute', dirname(__FILE__).'/../');
-require_once(InteractiveChartRoute . 'sdBaseChart.class.php');
 
 class InteractiveChart {
     
 
 
     static function newBarChart() {
-        require_once(InteractiveChartRoute . 'sdAxisBaseChart.class.php');
-        require_once(InteractiveChartRoute . 'sdBarGraph.class.php');
         return new BarGraph();
     }
 
     static function newLineChart() {
-        require_once(InteractiveChartRoute . 'sdAxisBaseChart.class.php');
-        require_once(InteractiveChartRoute . 'sdLineGraph.class.php');
         return new LineGraph();
     }
 
     static function newAreaChart() {
-        require_once(InteractiveChartRoute . 'sdAxisBaseChart.class.php');
-        require_once(InteractiveChartRoute . 'sdLineGraph.class.php');
-        require_once(InteractiveChartRoute . 'sdAreaGraph.class.php');
+        //require_once(InteractiveChartRoute . 'sdAxisBaseChart.class.php');
+        //require_once(InteractiveChartRoute . 'sdLineGraph.class.php');
+        //require_once(InteractiveChartRoute . 'sdAreaGraph.class.php');
         return new AreaGraph();
     }
 
     static function newColumnChart() {
-        require_once(InteractiveChartRoute . 'sdAxisBaseChart.class.php');
-        require_once(InteractiveChartRoute . 'sdBarGraph.class.php');
-        require_once(InteractiveChartRoute . 'sdColumnGraph.class.php');
         return new ColumnGraph();
     }
 
     static function newGuageChart() {
-        require_once(InteractiveChartRoute . 'sdGaugeGraph.class.php');
         return new GaugeGraph();
     }
 
     static function newPieChart() {
-        require_once(InteractiveChartRoute . 'sdPieGraph.class.php');
         return new PieGraph();
+    }
+
+    static function newTimeLineChart() {
+        //require_once(InteractiveChartRoute . 'sdPieGraph.class.php');
+        return new AnnotatedTimeLineGraph();
     }
 
 
@@ -90,19 +83,19 @@ function addInteractiveChartJavascript() {
     $ajax_api_url = sfConfig::get('app_sdInteractiveChart_chart_js_url');
     $ajax_api = sfConfig::get('app_sdInteractiveChart_ajax_api');
 
-    if (isset($_SERVER['HTTPS']))
+    if (isset($_SERVER['HTTPS'])) { // Load over SSL if the page is over SSL - Google supports this!
         $ajax_api_url = str_replace ('http:', 'https:', $ajax_api_url);
+    }
     sfContext::getInstance()->getResponse()->addJavascript($ajax_api_url . $ajax_api);
 
-    if (sfConfig::get('app_sdInteractiveChart_debug_mode')) {
+    if ((sfConfig::get('sf_environment', 'not set')) || (sfConfig::get('app_sdInteractiveChart_debug_mode'))) {
         $url = sfConfig::get('app_sdInteractiveChart_web_dir') . "/js/interactiveCharts$version.js";
-        if (isset($_SERVER['HTTPS']))
-            $url = str_replace ('http:', 'https:', $url);
+        if (!file_exists(sfConfig::get('sf_web_dir') . $url)) {
+            throw new Exception('Unable to locate SF_WEB_DIR' . $url . ' you need to the run the symfony plugin:publish-assets method.', E_WARNING);
+        }
         sfContext::getInstance()->getResponse()->addJavascript($url, 'last');
     } else {
         $url = sfConfig::get('app_sdInteractiveChart_web_dir') . "/js/interactiveCharts$version-min.js";
-        if (isset($_SERVER['HTTPS']))
-            $url = str_replace ('http:', 'https:', $url);
         sfContext::getInstance()->getResponse()->addJavascript($url, 'last');
     }
 }

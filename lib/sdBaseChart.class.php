@@ -5,7 +5,7 @@
  * @package    plugins
  * @subpackage sdInteractiveChart
  * @author     Seb Dangerfield
- * @version    0.3
+ * @version    0.4
  */
 
 class BaseChart {
@@ -24,6 +24,24 @@ class BaseChart {
     protected $fontSize = null;
     protected $fontName = null;
     private $loadedPackages = array();
+
+    /**
+     * -- For use when there isn't a dedicated function for the option you want to set.
+     * For example to set the data colours use the 'setDataColors()' function instead.
+     * Sets an option on the google chart as defined in Google's visualization
+     * API documentation, make sure you use exactly the same name (case senstive)
+     *
+     * Data Types: also make sure you always use the correct data type when
+     *             passing values to this function, if Google's API expects an
+     *             array give this function an array, it will not work it out for
+     *             you an convert.
+     *
+     * @param string $name
+     * @param any $value
+     */
+    public function setOption($name, $value) {
+        $this->{$name} = $value;
+    }
 
 
     /**
