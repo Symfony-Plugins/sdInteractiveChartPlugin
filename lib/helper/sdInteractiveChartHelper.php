@@ -12,42 +12,82 @@
 class InteractiveChart {
     
 
-
+    /**
+     * Creates and returns a new instance of the BarChart class to use.
+     *
+     * @return BarGraph
+     */
     static function newBarChart() {
         return new BarGraph();
     }
 
+    /**
+     * Creates and returns a new instance of the LineChart class to use.
+     * 
+     * @return LineGraph
+     */
     static function newLineChart() {
         return new LineGraph();
     }
 
+    /**
+     * Creates and returns a new instance of the AreaChart class to use.
+     *
+     * @return AreaGraph
+     */
     static function newAreaChart() {
-        //require_once(InteractiveChartRoute . 'sdAxisBaseChart.class.php');
-        //require_once(InteractiveChartRoute . 'sdLineGraph.class.php');
-        //require_once(InteractiveChartRoute . 'sdAreaGraph.class.php');
         return new AreaGraph();
     }
 
+    /**
+     * Creates and returns a new instance of the ColumnChart class to use.
+     * 
+     * @return ColumnGraph
+     */
     static function newColumnChart() {
         return new ColumnGraph();
     }
 
+    /**
+     * Creates and returns a new instance of the GaugeChart class to use.
+     * 
+     * @return GaugeGraph
+     */
     static function newGuageChart() {
         return new GaugeGraph();
     }
 
+    /**
+     * Creates and returns a new instance of the PieChart class to use.
+     * 
+     * @return PieGraph
+     */
     static function newPieChart() {
         return new PieGraph();
     }
 
+    /**
+     * Creates and returns a new instance of the TimelineChart class to use.
+     * - NEW V0.4 - Thanks to Robert Heim
+     *
+     * @return AnnotatedTimeLineGraph
+     */
     static function newTimeLineChart() {
-        //require_once(InteractiveChartRoute . 'sdPieGraph.class.php');
         return new AnnotatedTimeLineGraph();
     }
 
 
 
-     static function generateJsonData(&$data, $chartLabels, $extraData = array()) {
+    /**
+     * Formats chart data into the correct format to be returned as JSON data to the 
+     * plugin AJAX data request.
+     *
+     * @param array $data
+     * @param array $chartLabels
+     * @param array $extraData
+     * @return string - JSON encoded data to be returned to create the chart
+     */
+    static function generateJsonData(&$data, $chartLabels, $extraData = array()) {
         $result = $extraData;
         $result['dataNames'] = array();
         $result['data'] = array();
@@ -77,7 +117,11 @@ class InteractiveChart {
 
 }
 
-
+/**
+ * This function is automatically called when symfony loads factories.
+ * It will add the required JS files to the list to be inlcuded in the
+ * template file.
+ */
 function addInteractiveChartJavascript() {
     $version = '0.3.0';
     $ajax_api_url = sfConfig::get('app_sdInteractiveChart_chart_js_url');
@@ -87,16 +131,17 @@ function addInteractiveChartJavascript() {
         $ajax_api_url = str_replace ('http:', 'https:', $ajax_api_url);
     }
     sfContext::getInstance()->getResponse()->addJavascript($ajax_api_url . $ajax_api);
-
+    $relRoot = sfContext::getInstance()->getRequest()->getRelativeUrlRoot();
+    
     if ((sfConfig::get('sf_environment', 'not set')) || (sfConfig::get('app_sdInteractiveChart_debug_mode'))) {
         $url = sfConfig::get('app_sdInteractiveChart_web_dir') . "/js/interactiveCharts$version.js";
         if (!file_exists(sfConfig::get('sf_web_dir') . $url)) {
-            throw new Exception('Unable to locate SF_WEB_DIR' . $url . ' you need to the run the symfony plugin:publish-assets method.', E_WARNING);
+            //throw new Exception('Unable to locate SF_WEB_DIR' . $url . ' you need to the run the symfony plugin:publish-assets method.', E_WARNING);
         }
-        sfContext::getInstance()->getResponse()->addJavascript($url, 'last');
+        sfContext::getInstance()->getResponse()->addJavascript($relRoot . $url, 'last');
     } else {
         $url = sfConfig::get('app_sdInteractiveChart_web_dir') . "/js/interactiveCharts$version-min.js";
-        sfContext::getInstance()->getResponse()->addJavascript($url, 'last');
+        sfContext::getInstance()->getResponse()->addJavascript($relRoot . $url, 'last');
     }
 }
 

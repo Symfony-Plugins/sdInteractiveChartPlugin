@@ -70,6 +70,11 @@ class AxisBaseChart extends BaseChart {
     }
 
 
+    /**
+     * Sets the title of the chart
+     *
+     * @param string $title
+     */
     public function setTitle($title) {
         $this->title = $title;
     }

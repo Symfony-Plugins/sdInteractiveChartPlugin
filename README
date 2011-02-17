@@ -1,5 +1,5 @@
 # sdInteractiveChartPlugin
-**Version 0.3**
+**Version 0.4**
 
 ##Overview
 
@@ -14,6 +14,7 @@ in any required libraries.
 
 It can create a number of different charts:
 
+*  Annotated Time Lines (NEW)
 *  Area Charts
 *  Bar Charts
 *  Column Charts
@@ -21,11 +22,12 @@ It can create a number of different charts:
 *  Line Graphs
 *  Pie Charts
 
-Timeline graphs will be added in a future version.
+More usage examples can be found at:
+[sdInteractiveChartPlugin Examples](http://www.sebdangerfield.me.uk/sdInteractiveChartPlugin "More examples on my blog!")
 
 ###Requirements:
 
-This plugin requires jQuery, only tested with 1.4.2 although should work with
+This plugin requires jQuery, has been tested with 1.4.2, 1.4.4 and 1.5.0 although should work with
 earlier versions as none of the jquery functions used are new ones.
 
 ##How to Include
@@ -39,7 +41,7 @@ To install simply use:
 If this doesn't work (which for some reason happens with some versions of symfony)
 just download the package to your local machine and then use:
 
-    $ symfony plugin:install /path/to/plugin/sdInteractiveChartPlugin-0.3.0.tgz
+    $ symfony plugin:install /path/to/plugin/sdInteractiveChartPlugin-0.4.0.tgz
 
 Clear the cache:
 
@@ -92,6 +94,7 @@ charts, each one returns a chart object of the type requested:
 *  newColumnChart -- (returns: sdColumnGraph object)
 *  newGuageChart -- (returns: sdGaugeGraph object)
 *  newPieChart -- (returns: sdPieGraph object)
+*  newTimeLineChart -- (returns: rhAnnotatedTimeLineGraph object)
 
 It also contains the special function:
 
@@ -181,3 +184,7 @@ on the chart.
 If you find any bugs or have any ideas for any new features which could be added just drop me an email.
 Or alternatively update your local copy of the code, then goto the *contribute* tab for this plugin and
 request to join the project as a developer!
+
+##Thanks
+
+Thanks to Robert Heim for providing the Annotated time line class.

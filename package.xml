@@ -10,11 +10,11 @@
   <email>seb.dangerfield@second2.com</email>
   <active>yes</active>
  </lead>
- <date>2010-11-09</date>
- <time>11:11:28</time>
+ <date>2011-02-17</date>
+ <time>21:00:28</time>
  <version>
-  <release>0.3.0</release>
-  <api>0.3.0</api>
+  <release>0.4.0</release>
+  <api>0.4.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -26,23 +26,24 @@
  </notes>
  <contents>
   <dir name="/">
-   <file md5sum="88ebf92129561ec160512f806d381d26" name="config/app.yml" role="data"/>
-   <file md5sum="0666e3c48ef2dfaa83ef33d45c82553a" name="config/config.php" role="data"/>
-   <file md5sum="34fe7608f60e3da1d6fe89fb7f1505b1" name="lib/helper/sdInteractiveChartHelper.php" role="data"/>
-   <file md5sum="a269de9ef7397f3e5dc09f61bd6d6cb5" name="lib/sdAreaGraph.class.php" role="data"/>
-   <file md5sum="5bd4acd373e9e82d7070c3b73e10be09" name="lib/sdAxisBaseChart.class.php" role="data"/>
-   <file md5sum="06a3f9dce5d4c029c316e41c4e1135a6" name="lib/sdBarGraph.class.php" role="data"/>
-   <file md5sum="c31bf19671c52b9d7a205f75114e38c6" name="lib/sdBaseChart.class.php" role="data"/>
-   <file md5sum="cfd466e7a8f256a7c930279b5d2d1f01" name="lib/sdColumnGraph.class.php" role="data"/>
-   <file md5sum="119034f01638366dc7f443ec04ba308e" name="lib/sdGaugeGraph.class.php" role="data"/>
-   <file md5sum="46bdc14e0c7780757c91af5413a46438" name="lib/sdInteractiveChartConfig.php" role="data"/>
-   <file md5sum="e178c3c199f6ca118a3451a3cff1aad1" name="lib/sdLineGraph.class.php" role="data"/>
-   <file md5sum="7889ca9521375637077887090bec6305" name="lib/sdPieGraph.class.php" role="data"/>
-   <file md5sum="bfd147acd2476d206f3c4261fffbf081" name="web/js/.htaccess" role="data"/>
-   <file md5sum="032e8e4edac92e115893828b58b8ff37" name="web/js/interactiveCharts0.3.0.js" role="data"/>
-   <file md5sum="b8726f8adf701134f3609cef6c2f6448" name="web/js/interactiveCharts0.3.0-min.js" role="data"/>
-   <file md5sum="a99d0480e222ef47b094c5b26d606452" name="README" role="data"/>
-   <file md5sum="91923838b916718902b9795f7624b88a" name="LICENSE" role="data"/>
+   <file md5sum="" name="config/app.yml" role="data"/>
+   <file md5sum="" name="config/config.php" role="data"/>
+   <file md5sum="" name="lib/helper/sdInteractiveChartHelper.php" role="data"/>
+   <file md5sum="" name="lib/sdAreaGraph.class.php" role="data"/>
+   <file md5sum="" name="lib/sdAxisBaseChart.class.php" role="data"/>
+   <file md5sum="" name="lib/sdBarGraph.class.php" role="data"/>
+   <file md5sum="" name="lib/sdBaseChart.class.php" role="data"/>
+   <file md5sum="" name="lib/sdColumnGraph.class.php" role="data"/>
+   <file md5sum="" name="lib/sdGaugeGraph.class.php" role="data"/>
+   <file md5sum="" name="lib/sdInteractiveChartConfig.php" role="data"/>
+   <file md5sum="" name="lib/sdLineGraph.class.php" role="data"/>
+   <file md5sum="" name="lib/sdPieGraph.class.php" role="data"/>
+   <file md5sum="" name="lib/rhAnnotatedTimeLineGraph.class.php" role="data"/>
+   <file md5sum="" name="web/js/.htaccess" role="data"/>
+   <file md5sum="" name="web/js/interactiveCharts0.3.0.js" role="data"/>
+   <file md5sum="" name="web/js/interactiveCharts0.3.0-min.js" role="data"/>
+   <file md5sum="" name="README" role="data"/>
+   <file md5sum="" name="LICENSE" role="data"/>
   </dir>
  </contents>
  <dependencies>
@@ -58,6 +59,23 @@
  </dependencies>
  <phprelease/>
  <changelog>
+  <release>
+   <version>
+    <release>0.4.0</release>
+    <api>0.4.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2010-11-09</date>
+   <notes>
+* New Chart Type: Added annotated time line
+* Improved automated adding of JS dependancies
+* Added general setOption function to be used to set options on the charts when
+  a dedicated function does not exist.
+   </notes>
+  </release>
   <release>
    <version>
     <release>0.3.0</release>
