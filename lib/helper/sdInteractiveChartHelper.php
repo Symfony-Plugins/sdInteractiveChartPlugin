@@ -133,7 +133,7 @@ function addInteractiveChartJavascript() {
     sfContext::getInstance()->getResponse()->addJavascript($ajax_api_url . $ajax_api);
     $relRoot = sfContext::getInstance()->getRequest()->getRelativeUrlRoot();
     
-    if ((sfConfig::get('sf_environment', 'not set')) || (sfConfig::get('app_sdInteractiveChart_debug_mode'))) {
+    if ((sfConfig::get('sf_environment', 'not set') == 'dev') || (sfConfig::get('app_sdInteractiveChart_debug_mode'))) {
         $url = sfConfig::get('app_sdInteractiveChart_web_dir') . "/js/interactiveCharts$version.js";
         if (!file_exists(sfConfig::get('sf_web_dir') . $url)) {
             //throw new Exception('Unable to locate SF_WEB_DIR' . $url . ' you need to the run the symfony plugin:publish-assets method.', E_WARNING);

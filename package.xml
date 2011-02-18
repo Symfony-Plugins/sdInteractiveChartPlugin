@@ -10,7 +10,7 @@
   <email>seb.dangerfield@second2.com</email>
   <active>yes</active>
  </lead>
- <date>2011-02-17</date>
+ <date>2011-02-18</date>
  <time>21:00:28</time>
  <version>
   <release>0.4.0</release>
@@ -54,7 +54,12 @@
    <pearinstaller>
     <min>1.4.1</min>
    </pearinstaller>
-   
+  <package>
+    <name>symfony</name>
+    <channel>pear.symfony-project.com</channel>
+    <min>1.1.0</min>
+    <max>1.5.0</max>
+   </package>
   </required>
  </dependencies>
  <phprelease/>
