@@ -5,7 +5,7 @@
  * @package    plugins
  * @subpackage sdInteractiveChart
  * @author     Seb Dangerfield
- * @version    0.4
+ * @version    0.4.1
  */
 
 class BaseChart {
@@ -24,6 +24,7 @@ class BaseChart {
     protected $fontSize = null;
     protected $fontName = null;
     private $loadedPackages = array();
+    private $noneJavascriptParams = array('html', 'chartPackage', 'loadedPackages');
 
     /**
      * -- For use when there isn't a dedicated function for the option you want to set.
@@ -154,9 +155,7 @@ class BaseChart {
      * @param string $divName - OPTIONAL name of the div to draw the chart in
      */
     public function inlineGraph($data, $labels, $divName = '') {
-        $randNum = rand(1, 1500);
-        $functionName = 'produceData' . $randNum;
-        unset($randNum);
+        $functionName = 'produceData' . InteractiveChart::$dataFunctionCount++;
         $this->html .= '<script type="text/javascript">'  . "\n";
             $this->html .= "function $functionName() {" . "\n";
                 $this->html .= $this->formatData($data, $labels);
@@ -189,7 +188,7 @@ class BaseChart {
         $this->html .= 'CHARTS.toCreate.push({';
 
         foreach ($this as $key => $propety) {
-            if (($key == 'html') || ($key == 'chartPackage') || ($key == 'loadedPackages'))
+            if ((in_array($key, $this->noneJavascriptParams)) || ($key == 'noneJavascriptParams'))
                 continue;
             if ((($key == 'callback') || ($key == 'data')) && ($propety != null)) {
                 $this->html .= "$key: $propety,";

@@ -10,10 +10,10 @@
   <email>seb.dangerfield@second2.com</email>
   <active>yes</active>
  </lead>
- <date>2011-02-18</date>
- <time>21:00:28</time>
+ <date>2011-05-15</date>
+ <time>21:00:00</time>
  <version>
-  <release>0.4.0</release>
+  <release>0.4.1</release>
   <api>0.4.0</api>
  </version>
  <stability>
@@ -64,6 +64,22 @@
  </dependencies>
  <phprelease/>
  <changelog>
+ <release>
+   <version>
+    <release>0.4.1</release>
+    <api>0.4.1</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2010-05-15</date>
+   <notes>
+* Fixed bug with the detection of https
+* Improved naming of JS chart data functions 
+* Minor refactoring of BaseChart code.
+   </notes>
+  </release>
   <release>
    <version>
     <release>0.4.0</release>
