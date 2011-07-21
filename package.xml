@@ -10,11 +10,11 @@
   <email>seb.dangerfield@second2.com</email>
   <active>yes</active>
  </lead>
- <date>2011-05-15</date>
- <time>21:00:00</time>
+ <date>2011-07-21</date>
+ <time>23:35:00</time>
  <version>
-  <release>0.4.1</release>
-  <api>0.4.0</api>
+  <release>0.4.2</release>
+  <api>0.4.2</api>
  </version>
  <stability>
   <release>beta</release>
@@ -66,14 +66,33 @@
  <changelog>
  <release>
    <version>
-    <release>0.4.1</release>
-    <api>0.4.1</api>
+    <release>0.4.2</release>
+    <api>0.4.2</api>
    </version>
    <stability>
     <release>beta</release>
     <api>beta</api>
    </stability>
-   <date>2010-05-15</date>
+   <date>2011-07-21</date>
+   <notes>
+Added Joep Brunsveld suggestion and code to allow access to the setFormattedValue function in the Google API
+see: http://code.google.com/apis/chart/interactive/docs/reference.html#DataTable_setFormattedValue
+
+Accessible either by using an array with string keys ('value', 'formatted_value') 
+or
+using a simple array with numerical keys and setting item 0 to the 'value' and 1 to the 'formatted_value'
+   </notes>
+  </release>
+ <release>
+   <version>
+    <release>0.4.1</release>
+    <api>0.4.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2011-05-15</date>
    <notes>
 * Fixed bug with the detection of https
 * Improved naming of JS chart data functions 
