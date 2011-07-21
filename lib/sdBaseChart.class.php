@@ -138,7 +138,18 @@ class BaseChart {
                  $this->html .= "data.setValue($dataText, 1, $dataSet);" . "\n";
             } else {
                 foreach($dataSet as $key=>$nextRow) {
-                   $this->html .= "data.setValue($key, $row, $nextRow);" . "\n";
+                    if ((!is_array($nextRow)) && !($nextRow instanceof sfOutputEscaperArrayDecorator)) {
+						// If we are given a single element, then we just use it as the standard value
+                        $this->html .= "data.setValue($key, $row, $nextRow);" . "\n";
+                    } else if (array_key_exists('value', $nextRow)) {
+						// If the array contains the key 'value' then we use keys to fetch the value and formatted value
+                        $this->html .= sprintf("data.setValue(%s, %s, %s);" . "\n", $key, $row, $nextRow['value']);
+                        $this->html .= sprintf("data.setFormattedValue(%s, %s, '%s');" . "\n", $key, $row, $nextRow['formatted_value']);
+					} else {
+						// If the array doesn't contain the key 'value' then we use numerical keys to fetch the value and formatted value.
+						$this->html .= sprintf("data.setValue(%s, %s, %s);" . "\n", $key, $row, $nextRow[0]);
+						$this->html .= sprintf("data.setFormattedValue(%s, %s, '%s');" . "\n", $key, $row, $nextRow[1]);
+					}
                 }
                 $row++;
             }
