@@ -1,5 +1,5 @@
 # sdInteractiveChartPlugin
-**Version 0.4.1**
+**Version 0.4.2**
 
 ##Overview
 
@@ -188,3 +188,4 @@ request to join the project as a developer!
 ##Thanks
 
 Thanks to Robert Heim for providing the Annotated time line class.
+And to Joep Brunsveld for the suggestion to add 'formatted_value' feature.
