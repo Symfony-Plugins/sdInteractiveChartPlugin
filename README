@@ -1,5 +1,5 @@
 # sdInteractiveChartPlugin
-**Version 0.4.2**
+**Version 0.5.0**
 
 ##Overview
 
@@ -14,7 +14,8 @@ in any required libraries.
 
 It can create a number of different charts:
 
-*  Annotated Time Lines (NEW)
+*  Scatter Charts (NEW)
+*  Annotated Time Lines
 *  Area Charts
 *  Bar Charts
 *  Column Charts
@@ -95,6 +96,7 @@ charts, each one returns a chart object of the type requested:
 *  newGuageChart -- (returns: sdGaugeGraph object)
 *  newPieChart -- (returns: sdPieGraph object)
 *  newTimeLineChart -- (returns: rhAnnotatedTimeLineGraph object)
+*  newScatterChart -- (returns: ScatterGraph object)
 
 It also contains the special function:
 

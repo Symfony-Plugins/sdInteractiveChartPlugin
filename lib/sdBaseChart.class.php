@@ -5,10 +5,18 @@
  * @package    plugins
  * @subpackage sdInteractiveChart
  * @author     Seb Dangerfield
- * @version    0.4.1
+ * @version    0.5.0
  */
 
 class BaseChart {
+    const AXIS_TITLES_POS_IN = 'in';
+    const AXIS_TITLES_POS_OUT = 'out';
+    const AXIS_TITLES_POS_NONE = 'none';
+    
+    const TITLE_POS_IN = 'in';
+    const TITLE_POS_OUT = 'out';
+    const TITLE_POS_NONE = 'none';
+    
     protected $width = 200;
     protected $height = 150;
     protected $backgroundColor = '#fff';
@@ -44,6 +52,13 @@ class BaseChart {
         $this->{$name} = $value;
     }
 
+    public function setAxisTitlesPosition($position) {
+        $this->axisTitlesPosition = $position;
+    }
+    
+    public function setTitlePosition($position) {
+        $this->titlePosition = $position;
+    }
 
     /**
      * If you need another javascript function to be called once the graph has
@@ -104,11 +119,11 @@ class BaseChart {
         $addedColumns = false;
         $this->html .= 'var data = new google.visualization.DataTable();' . "\n";
         if ($labels != null)
-            $this->html .= "data.addColumn('string','235');" . "\n";
+            $this->html .= "data.addColumn('string','Labels');" . "\n";
 
         $rowCountAdded = false;
-        $row = 1;
-        $latestRow = 0;
+        $row = 0;
+        $latestRow = -1;
         foreach($data as $dataText=>$dataSet) {
             if ($latestRow < $row) {
                 if (is_string($dataText)) {
@@ -127,15 +142,17 @@ class BaseChart {
                 }
                 $this->html .= 'data.addRows('.$total.');' . "\n";
                 // Draw labels
-                foreach($labels as $key=>$label) {
-                    $this->html .= "data.setValue($key, 0, '{$label}');" . "\n";
+                if ($labels != null) {
+                    foreach($labels as $key=>$label) {
+                        $this->html .= "data.setValue($key, 0, '{$label}');" . "\n";
+                    }
+                    $row++;
                 }
-
                 $rowCountAdded = true;
             }
             
             if ((!is_array($dataSet)) && !($dataSet instanceof sfOutputEscaperArrayDecorator)) {
-                 $this->html .= "data.setValue($dataText, 1, $dataSet);" . "\n";
+                 $this->html .= "data.setValue($dataText, $row, $dataSet);" . "\n";
             } else {
                 foreach($dataSet as $key=>$nextRow) {
                     if ((!is_array($nextRow)) && !($nextRow instanceof sfOutputEscaperArrayDecorator)) {

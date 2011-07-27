@@ -12,7 +12,15 @@
 class InteractiveChart {
     static $dataFunctionCount = 1;
     
-
+    /**
+     * Creates and returns a new instance of the BarChart class to use.
+     *
+     * @return BarGraph
+     */
+    static function newScatterChart() {
+        return new ScatterGraph();
+    }
+    
     /**
      * Creates and returns a new instance of the BarChart class to use.
      *

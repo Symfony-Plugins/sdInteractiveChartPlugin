@@ -10,11 +10,11 @@
   <email>seb.dangerfield@second2.com</email>
   <active>yes</active>
  </lead>
- <date>2011-07-21</date>
- <time>23:35:00</time>
+ <date>2011-07-27</date>
+ <time>23:45:00</time>
  <version>
-  <release>0.4.2</release>
-  <api>0.4.2</api>
+  <release>0.5.0</release>
+  <api>0.5.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -38,6 +38,7 @@
    <file md5sum="" name="lib/sdInteractiveChartConfig.php" role="data"/>
    <file md5sum="" name="lib/sdLineGraph.class.php" role="data"/>
    <file md5sum="" name="lib/sdPieGraph.class.php" role="data"/>
+   <file md5sum="" name="lib/sdScatterGraph.class.php" role="data"/>
    <file md5sum="" name="lib/rhAnnotatedTimeLineGraph.class.php" role="data"/>
    <file md5sum="" name="web/js/.htaccess" role="data"/>
    <file md5sum="" name="web/js/interactiveCharts0.3.0.js" role="data"/>
@@ -64,6 +65,24 @@
  </dependencies>
  <phprelease/>
  <changelog>
+  <release>
+   <version>
+    <release>0.5.0</release>
+    <api>0.5.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2011-07-27</date>
+   <notes>
+- Added new class to allow the Scatter Charts (ScatterGraph PHP Class)
+- Added new methods to the base class to allow direct access to new methods in Google's API
+--- setAxisTitlesPosition
+--- setTitlePosition
+- Modified formatData function in the base class to work with the scatter chart
+   </notes>
+  </release>
  <release>
    <version>
     <release>0.4.2</release>
